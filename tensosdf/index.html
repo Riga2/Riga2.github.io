@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>TensoSDF</title>
+
+    <meta name="description" content="TensoSDF: Roughness-aware Tensorial Representation for Robust Geometry and Material Reconstruction">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+	
+	
+	<link rel="stylesheet" href="css/dics.min.css">
+    <script src="scripts/dics.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', domReady);
+        function domReady() {
+            for (const e of document.querySelectorAll(".b-dics")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top"
+                });
+            }
+        }
+    </script>
+	
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>TensoSDF</b>: Roughness-aware Tensorial Representation for Robust Geometry and Material Reconstruction <br>
+                <small>
+                    ACM Transactions on Graphics (Proceedings of SIGGRAPH 2024)
+                </small>
+            </h2>
+        </div>
+		
+		<div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://riga2.github.io/">
+                          Jia Li
+                        </a>
+                        <br>Shandong University<br>
+                    </li>
+					<li>
+                        <a href="https://wanglusdu.github.io/">
+                          Lu Wang*
+                        </a>
+                        <br>Shandong University<br>
+                    </li>
+					<li>
+                        <a href="https://www4.comp.polyu.edu.hk/~cslzhang/">
+                          Lei Zhang
+                        </a>
+                        <br>The Hong Kong Polytechnic University<br>
+                    </li>
+                    <li>
+                        <a href="https://wangningbei.github.io/">
+                          Beibei Wang*
+                        </a>
+                        <br>Nanjing University<br>
+                    </li><br>
+                </ul>
+            </div>
+        </div>
+		
+		<div class="row">
+            <div class="col-md-12 text-center">
+                *Denotes corresponding authors
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+							<a href="https://arxiv.org/abs/2402.02771" target="_blank">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/Riga2/TensoSDF" target="_blank">
+                                <h4><strong>Codes</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://drive.google.com/file/d/1JI2kMvi_79JIUBGbUBckxeCAgrWEW0kl/view?usp=drive_link" target="_blank">
+                                <h4><strong>Dataset</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Video
+                </h3>
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe src="" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>
+                    Abstract
+                </h3>
+                <image src="imgs/Jia2024TensoSDF.png" style="width:100%;" class="img-responsive center-block" alt="overview"></image>
+                <br>
+                <p class="text-justify">
+                    Reconstructing objects with realistic materials from multi-view images is problematic, since it is highly ill-posed. Although the neural reconstruction approaches have exhibited impressive reconstruction ability, they are designed for objects with specific materials (e.g., diffuse or specular materials). To this end, we propose a novel framework for robust geometry and material reconstruction, where the geometry is expressed with the implicit signed distance field (SDF) encoded by a tensorial representation, namely TensoSDF. At the core of our method is the roughness-aware incorporation of the radiance and reflectance fields, which enables a robust reconstruction of objects with arbitrary reflective materials. Furthermore, the tensorial representation enhances geometry details in the reconstructed surface and reduces the training time. Finally, we estimate the materials using an explicit mesh for efficient intersection computation and an implicit SDF for accurate representation. Consequently, our method can achieve more robust geometry reconstruction, outperform the previous works in terms of relighting quality, and reduce 50% training times and 70% inference time.
+                </p>
+            </div>
+        </div>
+
+        <div class="row comp-margin">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>
+                    Scenes
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 text-center">
+                <ul class="nav nav-pills nav-justified">
+                    <li>
+                        <img src="imgs/input_compressor.png" width="160px"/>
+                        <h5><strong>Compressor</strong></h5>
+                    </li>
+                    <li>
+                        <img src="imgs/input_helmet.png" width="160px"/>
+                        <h5><strong>Helmet</strong></h5>
+                    </li>
+                    <li>
+                        <img src="imgs/input_robot.png" width="160px"/>
+                        <h5><strong>Robot</strong></h5>
+                    </li>
+                    <li>
+                        <img src="imgs/input_rover.png" width="160px"/>
+                        <h5><strong>Rover</strong></h5>
+                    </li>
+                    <li>
+                        <img src="imgs/input_motor.png" width="160px"/>
+                        <h5><strong>Motor</strong></h5>
+                    </li>
+                    <li>
+                        <img src="imgs/input_dragon.png" width="160px"/>
+                        <h5><strong>Dragon</strong></h5>
+                    </li>
+                </ul>
+            </div>
+    </div>
+
+    <div class="row comp-margin">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                Geometry Reconstruction
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <div class="b-dics" style="width: 240px">
+                        <img src="imgs/neus_compressor.png" alt="NeuS" />
+                        <img src="imgs/ours_compressor.png" alt="Ours" />
+                    </div>
+                </li>
+                <li>
+                    <div class="b-dics" style="width: 240px">
+                        <img src="imgs/neus_helmet.png" alt="NeuS" />
+                        <img src="imgs/ours_helmet.png" alt="Ours" />
+                    </div>
+                </li>
+                <li>
+                    <div class="b-dics" style="width: 240px">
+                        <img src="imgs/neilfpp_motor.png" alt="NeILF++" />
+                        <img src="imgs/ours_motor.png" alt="Ours" />
+                    </div>
+                </li>
+                <li>
+                    <div class="b-dics" style="width: 240px">
+                        <img src="imgs/neilfpp_dragon.png" alt="NeILF++" />
+                        <img src="imgs/ours_dragon.png" alt="Ours" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row comp-margin">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                Relighting Results
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <div class="b-dics" style="width: 240px">
+                        <img src="imgs/neilfpp_compressor_courtyard.png" alt="NeILF++" />
+                        <img src="imgs/ours_compressor_courtyard.png" alt="Ours" />
+                    </div>
+                </li>
+                <li>
+                    <div class="b-dics" style="width: 240px">
+                        <img src="imgs/neilfpp_helmet_city.png" alt="NeILF++" />
+                        <img src="imgs/ours_helmet_city.png" alt="Ours" />
+                    </div>
+                </li>
+                <li>
+                    <div class="b-dics" style="width: 240px">
+                        <img src="imgs/neilfpp_robot_bridge.png" alt="NeILF++" />
+                        <img src="imgs/ours_robot_bridge.png" alt="Ours" />
+                    </div>
+                </li>
+                <li>
+                    <div class="b-dics" style="width: 240px">
+                        <img src="imgs/neilfpp_rover_night.png" alt="NeILF++" />
+                        <img src="imgs/ours_rover_night.png" alt="Ours" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="row comp-margin">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                Other Results
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <video muted autoplay="autoplay" loop="loop" width="960px">
+                        <source src="imgs/horse_results.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <br>
+                <li>
+                    <video muted autoplay="autoplay" loop="loop" width="960px">
+                        <source src="imgs/lego_results.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <br>
+                <li>
+                    <video muted autoplay="autoplay" loop="loop" width="960px">
+                        <source src="imgs/luckycat_results.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <br>
+                <li>
+                    <video muted autoplay="autoplay" loop="loop" width="960px">
+                        <source src="imgs/qilin_results.mp4" type="video/mp4">
+                    </video>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h3>
+            Citation
+        </h3>
+        <div class="form-group col-md-10">
+            <textarea id="bibtex" class="form-control" readonly>
+@article{Li:2024:TensoSDF,
+  title={TensoSDF: Roughness-aware Tensorial Representation for Robust Geometry and Material Reconstruction},
+  author={Jia Li and Lu Wang and Lei Zhang and Beibei Wang},
+  journal ={ACM Transactions on Graphics (Proceedings of SIGGRAPH 2024)},
+  year = {2024},
+  volume = {43},
+  number = {4},
+  pages={150:1--13}
+}
+</textarea>
+        </div>
+    </div>
+</div>	    
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                The website template was borrowed from <a href="https://bakedsdf.github.io/">BakedSDF</a>.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
