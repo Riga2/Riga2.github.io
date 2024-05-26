@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>NSRD</title>
+
+    <meta name="description" content="Neural Super-Resolution for Real-time Rendering with Radiance Demodulation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+	
+	
+	<link rel="stylesheet" href="css/dics.min.css">
+    <script src="scripts/dics.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', domReady);
+        function domReady() {
+            for (const e of document.querySelectorAll(".b-dics")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top"
+                });
+            }
+        }
+    </script>
+	
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>N</b>eural <b>S</b>uper-Resolution for Real-time Rendering with <b>R</b>adiance <b>D</b>emodulation<br>
+                <small>
+                    CVPR 2024
+                </small>
+            </h2>
+        </div>
+		
+		<div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://riga2.github.io/">
+                          Jia Li<sup>1</sup>
+                        </a>
+                    </li>
+                    <li>
+                        Ziling Chen<sup>1</sup>
+                    </li>
+                    <li>
+                        Xiaolong Wu<sup>1</sup>
+                    </li>
+					<li>
+                        <a href="https://wanglusdu.github.io/">
+                          Lu Wang<sup>1,*</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wangningbei.github.io/">
+                          Beibei Wang<sup>2,*</sup>
+                        </a>
+                    </li>
+					<li>
+                        <a href="https://www4.comp.polyu.edu.hk/~cslzhang/">
+                          Lei Zhang<sup>3</sup>
+                        </a>
+                    </li><br>
+                </ul>
+            </div>
+        </div>
+		
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li><sup>1</sup>Shandong University</li>
+                    <li><sup>2</sup>Nanjing University</li>
+                    <li><sup>3</sup>The Hong Kong Polytechnic University</li>
+                </ul>
+            </div>
+        </div>
+
+		<div class="row">
+            <div class="col-md-12 text-center">
+                *Denotes corresponding authors
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+							<a href="https://arxiv.org/abs/2308.06699" target="_blank">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/Riga2/NSRD" target="_blank">
+                                <h4><strong>Codes</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pan.baidu.com/s/1GJZ34keRFvGqnJ1Wgg0RHw?pwd=riga" target="_blank">
+                                <h4><strong>Dataset</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Video
+                </h3>
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe src="" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>
+                    Abstract
+                </h3>
+                <image src="imgs/Jia2024nsrd.png" style="width:100%;" class="img-responsive center-block" alt="overview"></image>
+                <br>
+                <p class="text-justify">
+                    It is time-consuming to render high-resolution images in applications such as video games and virtual reality,
+                    and thus super-resolution technologies become increasingly popular for real-time rendering. However, it is challenging to preserve sharp texture details, keep the temporal stability and avoid the ghosting artifacts in real-time 
+                    super-resolution rendering. To address this issue, we introduce radiance demodulation to separate the rendered
+                    image or radiance into a lighting component and a material component, considering the fact that the light component is smoother than the rendered image so that the highresolution material component with detailed textures can 
+                    be easily obtained. We perform the super-resolution on the lighting component only and re-modulate it with the highresolution material component to obtain the final superresolution image with more texture details. 
+                    A reliable warping module is proposed by explicitly marking the occluded
+                    regions to avoid the ghosting artifacts. To further enhance the temporal stability, we design a frame-recurrent neural network and a temporal loss to aggregate the previous
+                    and current frames, which can better capture the spatialtemporal consistency among reconstructed frames. As a result, our method is able to produce temporally stable results in real-time rendering with high-quality details, even
+                    in the challenging 4 &times; 4 super-resolution scenarios.
+                </p>
+            </div>
+        </div>
+
+    <div class="row comp-margin">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                6 &times; 6 Results
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <div class="b-dics" style="width: 960px">
+                        <img src="imgs/LR_X6.png" alt="LR" />
+                        <img src="imgs/Ours_X6.png" alt="Ours" />
+                        <img src="imgs/GT_X6.png" alt="GT" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="row comp-margin">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                4 &times; 4 Results
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <img src="imgs/4SR_comp.png", width="960px">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row comp-margin">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                2 &times; 2 Results
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <img src="imgs/2SR_comp.png", width="960px">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h3>
+            Citation
+        </h3>
+        <div class="form-group col-md-10">
+            <textarea id="bibtex" class="form-control" readonly>
+@inproceedings{li2024nsrd,
+    title={Neural Super-Resolution for Real-time Rendering with Radiance Demodulation},
+    author={Li, Jia and Chen, Ziling and Wu, Xiaolong and Wang, Lu and Wang, Beibei and Zhang, Lei},
+    booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    year={2024}
+    }
+</textarea>
+        </div>
+    </div>
+</div>	    
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                The website template was borrowed from <a href="https://bakedsdf.github.io/">BakedSDF</a>.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
