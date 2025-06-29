@@ -81,22 +81,22 @@
   p,
   a {
     font-family: 'Lato', Verdana, Helvetica, sans-serif;
-    font-size: 14px
+    font-size: 16px
   }
   
   strong {
     font-family: 'Lato', Verdana, Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
   }
   
   heading {
     font-family: 'Lato', Verdana, Helvetica, sans-serif;
-    font-size: 22px;
+    font-size: 24px;
   }
   
   papertitle {
     font-family: 'Lato', Verdana, Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700
   }
   
@@ -128,4 +128,12 @@
   
   span.highlight {
     background-color: #ffffd0;
+  }
+
+  .colored-box {
+    color: black;
+    padding: 20px;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 20px;
   }
