@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>I3DM</title>
+
+    <meta name="description" content="I3DM: Implicit 3D-aware Memory Retrieval and Injection for Consistent Video Scene Generation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+	
+	
+	<link rel="stylesheet" href="css/dics.min.css">
+    <script src="scripts/dics.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', domReady);
+        function domReady() {
+            for (const e of document.querySelectorAll(".b-dics")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top"
+                });
+            }
+        }
+    </script>
+	
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>I3DM</b>: Implicit 3D-aware Memory Retrieval and Injection <br> for Consistent Video Scene Generation <br>
+                <small>
+                    Arxiv, 2026
+                </small>
+            </h2>
+        </div>
+		
+		<div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://riga2.github.io/">
+                          Jia Li<sup>1,2,*</sup>
+                        </a>
+                    </li>
+					<li>
+                        <a href="https://wolfball.github.io/">
+                          Han Yan<sup>2,3</sup>
+                        </a>
+                    </li>
+					<li>
+                        <a href="https://yihangchen-ee.github.io/">
+                          Yihang Chen<sup>1,3</sup>
+                        </a>
+                    </li>
+                    <li>
+                        Siqi Li<sup>2</sup>
+                    </li><br>
+					<li>
+                        <a href="https://xbsong.github.io/">
+                          Xibin Song<sup>2</sup>
+                        </a>
+                    </li>
+					<li>
+                        <a href="https://1fwang.github.io/">
+                          Yifu Wang<sup>2</sup>
+                        </a>
+                    </li>
+					<li>
+                        <a href="https://jianfei-cai.github.io/">
+                          Jianfei Cai<sup>1</sup>
+                        </a>
+                    </li>
+					<li>
+                        <a href="https://ttwong12.github.io/myself.html">
+                          Tien-Tsin Wong<sup>1</sup>
+                        </a>
+                    </li>
+					<li>
+                        <a href="https://github.com/panji530">
+                          Pan Ji<sup>2</sup>
+                        </a>
+                    </li><br>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li><sup>1</sup>Monash University</li>
+                    <li><sup>2</sup>Vertex Lab</li>
+                    <li><sup>3</sup>Shanghai Jiao Tong University</li>
+                </ul>
+            </div>
+        </div>
+
+		<div class="row">
+            <div class="col-md-12 text-center">
+                *Work done during internship at Vertex Lab
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <h4><strong>Paper (Coming soon)</strong></h4>
+                        </li>
+                        <li>
+                            <h4><strong>Codes (Coming soon)</strong></h4>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>
+                    Abstract
+                </h3>
+                <image src="imgs/teaser.png" style="width:85%;" class="img-responsive center-block" alt="overview"></image>
+                <br>
+                <p class="text-justify">
+                    Despite remarkable progress in video generation, maintaining long-term scene consistency upon revisiting previously explored areas remains challenging. Existing solutions rely either on explicitly constructing 3D geometry, which suffers from error accumulation and scale ambiguity, or on naive camera Field-of-View (FoV) retrieval, which typically fails under complex occlusions. To overcome these limitations, we propose <strong>I3DM</strong>, a novel implicit 3D-aware memory mechanism for consistent video scene generation that bypasses explicit 3D reconstruction. At the core of our approach is a 3D-aware memory retrieval strategy, which leverages the intermediate features of a pre-trained Feed-Forward Novel View Synthesis (FF-NVS) model to score view relevance, enabling robust retrieval even in highly occluded scenarios. Furthermore, to fully utilize the retrieved historical frames, we introduce a 3D-aligned memory injection module. This module implicitly warps historical content to the target view and adaptively conditions the generation on reliable warping regions, leading to improved revisit consistency and accurate camera control. Extensive experiments demonstrate that our method outperforms state-of-the-art approaches, achieving superior revisit consistency, generation fidelity, and camera control precision.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>
+                    Motivation
+                </h3>
+                <image src="imgs/motivation.png" style="width:80%;" class="img-responsive center-block" alt="overview"></image>
+                <br>
+                <p class="text-justify">
+                    Limitations of existing memory mechanisms. (Top-Left) Explicit geometry-based methods (e.g., Gen3C) suffer from scale estimation ambiguity, leading to inaccurate camera navigation (e.g., colliding with the wall) and revisit inconsistencies. (Top-Right) Implicit FoV-based methods (e.g., WorldPlay) fail under occlusions, as FoV overlap ignores actual visual visibility. This retrieves irrelevant historical frames, causing repeated semantic content and inconsistent revisits. (Bottom) Visual examples. Frames with matching colors denote the same viewpoint and should be strictly consistent. Red circles highlight inconsistencies, and red box indicates the repeated content.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>
+                    Method
+                </h3>
+                <image src="imgs/method.png" style="width:80%;" class="img-responsive center-block" alt="overview"></image>
+                <br>
+                <p class="text-justify">
+                    Overview of the proposed <strong>I3DM</strong> framework. Left: <em>3D-aware Memory Retrieval</em>. For each historical frame in the memory bank, we first extract 3D-aware intermediate features using a pre-trained NVS model. A lightweight scoring network then evaluates their spatial relevance to the target view to select the most relevant frames. Right: <em>3D-aligned Memory Injection</em>. The retrieved frames are processed by an Adaptive NVS Module to align them with the target view. These aligned results are then used to condition the Wan-DiT backbone for consistent video scene generation.
+                </p>
+            </div>
+        </div>
+
+    <div class="row comp-margin">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                Cycle-Trajectory Results
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li style="padding: 5px;">
+                    <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
+                        <source src="imgs/0b1e61c69c98026b.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <li style="padding: 5px;">
+                    <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
+                        <source src="imgs/166818269e4e2568.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <li style="padding: 5px;">
+                    <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
+                        <source src="imgs/0b55abc1ca2fe909.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <br>
+                <li style="padding: 5px;">
+                    <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
+                        <source src="imgs/1aa94a69594df8a6.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <li style="padding: 5px;">
+                    <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
+                        <source src="imgs/1ad8ec6d75441e51.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <li style="padding: 5px;">
+                    <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
+                        <source src="imgs/12cb4aa3f5b59ad6.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <br>
+                <li style="padding: 5px;">
+                    <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
+                        <source src="imgs/0a0027a48d9ff2ae.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <li style="padding: 5px;">
+                    <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
+                        <source src="imgs/16b8ab24bd231f9a.mp4" type="video/mp4">
+                    </video>
+                </li>
+                <li style="padding: 5px;">
+                    <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
+                        <source src="imgs/098263de57257005.mp4" type="video/mp4">
+                    </video>
+                </li>                
+            </ul>
+        </div>
+    </div>
+
+    <div class="row comp-margin">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                Ablation Study
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <video muted autoplay="autoplay" loop="loop" width="720px" controls="controls" onloadedmetadata="this.playbackRate = 1.0">
+                        <source src="imgs/page_ab.mp4" type="video/mp4">
+                    </video>
+                </li>          
+            </ul>
+        </div>
+    </div>
+
+    <div class="row comp-margin">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                Results of Self-Captured Scenes
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <video muted autoplay="autoplay" loop="loop" width="720px" controls="controls" onloadedmetadata="this.playbackRate = 1.0">
+                        <source src="imgs/pg_self_capture.mp4" type="video/mp4">
+                    </video>
+                </li>          
+            </ul>
+        </div>
+    </div>
+
+    
+    <br>
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h3>
+            Citation
+        </h3>
+        <div class="form-group col-md-10">
+            <textarea id="bibtex" class="form-control" readonly>
+            TBD...
+</textarea>
+        </div>
+    </div>
+</div>	    
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                The website template was borrowed from <a href="https://bakedsdf.github.io/">BakedSDF</a>.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
