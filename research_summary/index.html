@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consistent Video Scene Exploration</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #111;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 300;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+        .challenges-list {
+            margin-left: 1rem;
+        }
+        .challenges-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Media gallery styles */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .media-item {
+            background: #f8f9fa;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        video, img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            background-color: #ddd; /* placeholder background */
+        }
+        .caption {
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+            color: #555;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Consistent Video Scene Exploration</h1>
+        <div class="subtitle">Research Proposal - <a href="https://riga2.github.io/">Jia Li</a></div>
+    </header>
+
+    <section id="overview">
+        <h2>Overview</h2>
+        <p>
+            Given a single image or text prompt, consistent video scene generation aims to support long-term scene exploration under camera or user control, where users can freely navigate within a generated scene and revisit previously observed regions with consistent appearance and geometry. This problem is critical for applications such as immersive exploration using video generation models, similar to interactive gaming experiences, yet remains challenging for existing methods.
+        </p>
+    </section>
+
+    <section id="challenges">
+        <h2>Research Problems</h2>
+        <p>Although there are many works trying to achieve consistent video scene generation by maintaining a global 3D representation (e.g., point clouds or 3DGS), they often encounter scale ambiguity in depth estimation and introduce reconstruction artifacts that may further degrade video generation quality. In contrast, our core idea is to avoid these artifacts as much as possible and leverage accurate information to implicitly guide the video generation process.</p>
+        <div class="challenge-block" style="margin-bottom: 2.5rem;">
+            <h3>1. Lack of Global Planning and Memory in Long-term Video Scene Generation</h3>
+            <p>Existing long video generation models typically lack a global planning mechanism, resulting in incomplete scene structures, as shown in Video 1a. Even with memory mechanisms, they struggle to consistently return to previously generated states, as shown in Video 1b.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="media-item" style="flex: 1; min-width: 300px; margin: 1rem 0;">
+                    <video controls loop muted autoplay onloadedmetadata="this.playbackRate = 1.5">
+                        <source src="videos/test_in_06_origin_rot360.mp4" type="video/mp4">
+                    </video>
+                    <div class="caption">Video 1a. Incomplete global scene structures. <br> (generated from <a href="https://github.com/matrix-game-3.0" target="_blank">Matrix-Game-3.0</a>)</div>
+                </div>
+                <div class="media-item" style="flex: 1; min-width: 300px; margin: 1rem 0;">
+                    <video controls loop muted autoplay onloadedmetadata="this.playbackRate = 1.5">
+                        <source src="videos/test_combined_mosu.mp4" type="video/mp4">
+                    </video>
+                    <div class="caption">Video 1b. Inconsistency when returning to previously generated scenes. (generated from <a href="https://github.com/matrix-game-3.0" target="_blank">Matrix-Game-3.0</a>)</div>
+                </div>
+            </div>
+            <p>To overcome this, we propose to introduce <strong>panorama as a planner</strong> instead of directly generating panoramic videos, which is computationally expensive and inefficient. Our preliminary ideas are:</p>
+            <ul>
+                <li>Panoramas are generated only when the system detects key points to provide a global scene structure.</li>
+                <li>Intermediate frames are generated with smooth transitions when the player moves between key points.</li>
+            </ul>
+            <p><em>Key Challenge:</em> How to retrieve and align relevant panoramic information as conditioning signals for the video diffusion model, especially when players move across large distances in the scene:</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="media-item" style="flex: 1; min-width: 300px; margin: 1rem 0;">
+                    <video controls loop muted autoplay onloadedmetadata="this.playbackRate = 1.5">
+                        <source src="videos/test_pano_rotate360.mp4" type="video/mp4">
+                    </video>
+                    <div class="caption">Video 2a. Panorama as a planner leads to a better global scene structure, but only supports rotation at the origin.</div>
+                </div>
+                <div class="media-item" style="flex: 1; min-width: 300px; margin: 1rem 0;">
+                    <video controls loop muted autoplay onloadedmetadata="this.playbackRate = 1.5">
+                        <source src="videos/test_combined_walk_360.mp4" type="video/mp4">
+                    </video>
+                    <div class="caption">Video 2b. Panoramas can provide global historical context, but there are still inconsistencies due to limited coverage.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="challenge-block" style="margin-bottom: 2.5rem;">
+            <h3>2. Limited Generalization under Large-Range Camera Motion</h3>
+            <p>Current video diffusion models often fail under large-range camera motions. For example, they struggle to rotate around an object (e.g., > 180°) to reveal unseen viewpoints, leading to inconsistent or unrealistic generations, as shown below:</p>
+            <div class="media-item" style="max-width: 700px; margin: 1rem auto;">
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <video controls loop muted autoplay onloadedmetadata="this.playbackRate = 0.8">
+                            <source src="videos/rgb-gaoda-gen3r.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <video controls loop muted autoplay onloadedmetadata="this.playbackRate = 0.8">
+                            <source src="videos/gen3r-dafo_rot180.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="caption">Video 3. Large-range camera motion leads to inconsistent video generation (generated from <a href="https://xdimlab.github.io/Gen3R/" target="_blank">Gen3R</a>).</div>
+            </div>
+            <p>To address this, there are two potential approaches:</p>
+            <ul>
+                <li>Extract <strong>structural guidance</strong> (e.g., depth or semantic maps) as conditioning signals to enhance the model's understanding of scene geometry and improve generation quality.</li>
+                <li>Find implicit geometric correspondences between source and target views in recent NVS models (e.g., <a href="https://szymanowiczs.github.io/lagernvs" target="_blank">LargeNVS</a>), and inject them into video diffusion models using mechanisms similar to positional encoding.</li>
+            </ul>
+            <p>Available open-source training datasets:</p>
+            <ul>
+                <li>Real-world Datasets: <a href="https://dl3dv-10k.github.io/DL3DV-10K/" target="_blank">DL3DV-10K</a>, <a href="https://google.github.io/realestate10k/" target="_blank">Realestate10K</a>, etc.</li>
+                <li>Game-style Datasets: <a href="https://context-as-memory.github.io/" target="_blank">Context-as-Memory</a>, etc.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="expected-outcome">
+        <h2>Expected Outcome</h2>
+        <p>
+            With global planning, memory mechanisms, and geometry-enhanced video generation models, we expect to achieve long-term consistent video scene generation that allows players to explore scenes with large-range camera motions and revisit previously observed regions with consistent appearance and geometry. This will significantly enhance the immersive experience in games and other applications that rely on video generation models.
+        </p>
+    </section>
+
+</body>
+</html>
