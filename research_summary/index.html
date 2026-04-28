@@ -127,8 +127,7 @@
 <body>
     <main class="card">
         <p class="eyebrow">Private Preview</p>
-        <h1>Research Summary</h1>
-        <p>This page uses a lightweight front-end password gate for quick sharing. It discourages casual access, but it is not a secure access control system.</p>
+        <h1>Research Proposal</h1>
 
         <form id="gate-form">
             <label for="password">Password</label>
@@ -136,15 +135,12 @@
             <button type="submit">Open Page</button>
             <div id="error" class="error" aria-live="polite"></div>
         </form>
-
-        <p class="hint">After one successful entry, this tab stays unlocked until you close it.</p>
-        <p class="footnote">To change the password later, update the hash in this file.</p>
     </main>
 
     <script>
         const targetPage = "preview-4f7d9c.html";
         const sessionKey = "research-summary-access";
-        const passwordHash = "238baf80c02e67e7fa41b18d525aba6bc1413a66001486202b9e3ae788db0485";
+        const passwordHash = "9f8b245cbd4830f756e48de11ef58ea61b734989e7dc0bbc7085bdba1c639323";
         const form = document.getElementById("gate-form");
         const passwordInput = document.getElementById("password");
         const errorBox = document.getElementById("error");
