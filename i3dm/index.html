@@ -14,9 +14,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
-    <link rel="stylesheet" href="css/app.css">
-
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -43,8 +42,8 @@
 </head>
 
 <body>
-    <div class="container" id="main">
-        <div class="row">
+    <div class="container paper-page" id="main">
+        <div class="row project-header">
             <h2 class="col-md-12 text-center">
                 <b>I3DM</b>: Implicit 3D-aware Memory Retrieval and Injection <br> for Consistent Video Scene Generation <br>
                 <small>
@@ -53,7 +52,7 @@
             </h2>
         </div>
 		
-		<div class="row">
+		<div class="row author-row">
             <div class="col-md-12 text-center">
                 <ul class="list-inline">
                     <li>
@@ -103,7 +102,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row affiliation-row">
             <div class="col-md-12 text-center">
                 <ul class="list-inline">
                     <li><sup>1</sup>Monash University</li>
@@ -113,13 +112,13 @@
             </div>
         </div>
 
-		<div class="row">
+		<div class="row internship-note">
             <div class="col-md-12 text-center">
                 *Work done during internship at Vertex Lab
             </div>
         </div>
 
-        <div class="row">
+        <div class="row project-links">
                 <div class="col-md-6 col-md-offset-3 text-center">
                     <ul class="nav nav-pills nav-justified">
                         <li>
@@ -136,41 +135,15 @@
                 </div>
         </div>
 
-        <div class="row">
+        <div class="row content-section first-section">
             <div class="col-md-10 col-md-offset-1">
                 <h3>
                     Abstract
                 </h3>
-                <image src="imgs/teaser.png" style="width:85%;" class="img-responsive center-block" alt="overview"></image>
+                <img src="imgs/teaser_new.png" style="width:90%;" class="img-responsive center-block paper-figure" alt="I3DM overview">
                 <br>
                 <p class="text-justify">
-                    Despite remarkable progress in video generation, maintaining long-term scene consistency upon revisiting previously explored areas remains challenging. Existing solutions rely either on explicitly constructing 3D geometry, which suffers from error accumulation and scale ambiguity, or on naive camera Field-of-View (FoV) retrieval, which typically fails under complex occlusions. To overcome these limitations, we propose <strong>I3DM</strong>, a novel implicit 3D-aware memory mechanism for consistent video scene generation that bypasses explicit 3D reconstruction. At the core of our approach is a 3D-aware memory retrieval strategy, which leverages the intermediate features of a pre-trained Feed-Forward Novel View Synthesis (FF-NVS) model to score view relevance, enabling robust retrieval even in highly occluded scenarios. Furthermore, to fully utilize the retrieved historical frames, we introduce a 3D-aligned memory injection module. This module implicitly warps historical content to the target view and adaptively conditions the generation on reliable warping regions, leading to improved revisit consistency and accurate camera control. Extensive experiments demonstrate that our method outperforms state-of-the-art approaches, achieving superior revisit consistency, generation fidelity, and camera control precision.
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <h3>
-                    Motivation
-                </h3>
-                <image src="imgs/motivation.png" style="width:80%;" class="img-responsive center-block" alt="overview"></image>
-                <br>
-                <p class="text-justify">
-                    Limitations of existing memory mechanisms. (Top-Left) Explicit geometry-based methods (e.g., Gen3C) suffer from scale estimation ambiguity, leading to inaccurate camera navigation (e.g., colliding with the wall) and revisit inconsistencies. (Top-Right) Implicit FoV-based methods (e.g., WorldPlay) fail under occlusions, as FoV overlap ignores actual visual visibility. This retrieves irrelevant historical frames, causing repeated semantic content and inconsistent revisits. (Bottom) Visual examples. Frames with matching colors denote the same viewpoint and should be strictly consistent. Red circles highlight inconsistencies, and red box indicates the repeated content.
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <h3>
-                    Method
-                </h3>
-                <image src="imgs/method.png" style="width:80%;" class="img-responsive center-block" alt="overview"></image>
-                <br>
-                <p class="text-justify">
-                    Overview of the proposed <strong>I3DM</strong> framework. Left: <em>3D-aware Memory Retrieval</em>. For each historical frame in the memory bank, we first extract 3D-aware intermediate features using a pre-trained NVS model. A lightweight scoring network then evaluates their spatial relevance to the target view to select the most relevant frames. Right: <em>3D-aligned Memory Injection</em>. The retrieved frames are processed by an Adaptive NVS Module to align them with the target view. These aligned results are then used to condition the Wan-DiT backbone for consistent video scene generation.
+                    Maintaining scene consistency when a generated video revisits an earlier viewpoint remains challenging. Existing solutions rely either on explicitly constructing 3D geometry, which suffers from error accumulation and scale ambiguity, or on naive camera Field-of-View (FoV) retrieval, which typically fails under complex occlusions. To overcome these limitations, we propose <b>I3DM</b>, a novel implicit 3D-aware memory mechanism for consistent video scene generation that bypasses explicit 3D reconstruction. At the core of our approach is a 3D-aware memory retrieval strategy, which leverages the intermediate features of a pre-trained Feed-Forward Novel View Synthesis (FF-NVS) model to score view relevance, enabling robust retrieval even in highly occluded scenarios. Furthermore, to fully utilize the retrieved historical frames, we introduce a 3D-aligned memory injection module. This module implicitly warps historical content to the target view and adaptively conditions the generation on reliable warping regions, leading to improved revisit consistency and accurate camera control.
                 </p>
             </div>
         </div>
@@ -185,7 +158,7 @@
 
     <div class="row">
         <div class="col-md-10 col-md-offset-1 text-center">
-            <ul class="nav nav-pills nav-justified">
+            <ul class="nav nav-pills nav-justified video-grid">
                 <li style="padding: 5px;">
                     <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
                         <source src="imgs/0b1e61c69c98026b.mp4" type="video/mp4">
@@ -201,7 +174,6 @@
                         <source src="imgs/0b55abc1ca2fe909.mp4" type="video/mp4">
                     </video>
                 </li>
-                <br>
                 <li style="padding: 5px;">
                     <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
                         <source src="imgs/1aa94a69594df8a6.mp4" type="video/mp4">
@@ -217,7 +189,6 @@
                         <source src="imgs/12cb4aa3f5b59ad6.mp4" type="video/mp4">
                     </video>
                 </li>
-                <br>
                 <li style="padding: 5px;">
                     <video muted autoplay="autoplay" loop="loop" width="320px" controls="controls" onloadedmetadata="this.playbackRate = 2.0">
                         <source src="imgs/0a0027a48d9ff2ae.mp4" type="video/mp4">
@@ -237,17 +208,44 @@
         </div>
     </div>
 
+
+    <div class="row content-section">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                Motivation
+            </h3>
+            <img src="imgs/motivation.png" style="width:82%;" class="img-responsive center-block paper-figure" alt="Limitations of existing memory mechanisms">
+            <br>
+            <p class="text-justify">
+                Explicit geometry-based memory suffers from scale ambiguity and accumulated reconstruction errors, while Field-of-View retrieval can select irrelevant frames under occlusion. Both issues lead to inaccurate camera navigation and inconsistent revisits.
+            </p>
+        </div>
+    </div>
+
+    <div class="row content-section">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>
+                Method
+            </h3>
+            <img src="imgs/method.png" style="width:86%;" class="img-responsive center-block paper-figure" alt="Overview of the I3DM framework">
+            <br>
+            <p class="text-justify">
+                <strong>I3DM</strong> first scores historical frames with 3D-aware features from a pre-trained NVS model and retrieves the views most relevant to the target camera. An Adaptive NVS Module then aligns the selected memory and injects reliable regions into the Wan-DiT backbone for consistent generation.
+            </p>
+        </div>
+    </div>
+
     <div class="row comp-margin">
         <div class="col-md-10 col-md-offset-1">
             <h3>
-                Ablation Study
+                Comparing with Other Retrieval Methods
             </h3>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-10 col-md-offset-1 text-center">
-            <ul class="nav nav-pills nav-justified">
+            <ul class="nav nav-pills nav-justified single-video">
                 <li>
                     <video muted autoplay="autoplay" loop="loop" width="720px" controls="controls" onloadedmetadata="this.playbackRate = 1.0">
                         <source src="imgs/page_ab.mp4" type="video/mp4">
@@ -267,7 +265,7 @@
 
     <div class="row">
         <div class="col-md-10 col-md-offset-1 text-center">
-            <ul class="nav nav-pills nav-justified">
+            <ul class="nav nav-pills nav-justified single-video">
                 <li>
                     <video muted autoplay="autoplay" loop="loop" width="720px" controls="controls" onloadedmetadata="this.playbackRate = 1.0">
                         <source src="imgs/pg_self_capture.mp4" type="video/mp4">
@@ -279,7 +277,7 @@
 
     
     <br>
-    <div class="row">
+    <div class="row content-section citation-section">
     <div class="col-md-10 col-md-offset-1">
         <h3>
             Citation
@@ -297,7 +295,7 @@
     </div>
 </div>	    
 
-        <div class="row">
+        <div class="row acknowledgements">
             <div class="col-md-10 col-md-offset-1">
                 <h3>
                     Acknowledgements
