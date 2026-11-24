@@ -2,7 +2,7 @@
 """Remove audio in place, refresh first-frame posters, and update page cache keys.
 
 Run: python3 scripts/prepare_comparisons.py
-One case: python3 scripts/prepare_comparisons.py gen2_003_comp
+One case: python3 scripts/prepare_comparisons.py comp_case1_v2
 Requires ffmpeg and ffprobe. Existing case order and encoded video are preserved.
 Audio tracks are removed directly from comparisons/*.mp4 after validation.
 """
@@ -63,7 +63,7 @@ def refresh(source):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("case", nargs="?", help="Optional source stem, e.g. gen2_003_comp")
+    parser.add_argument("case", nargs="?", help="Optional source stem, e.g. comp_case1_v2")
     args = parser.parse_args()
     sources = sorted((ROOT / "comparisons").glob("*.mp4"))
     if args.case:

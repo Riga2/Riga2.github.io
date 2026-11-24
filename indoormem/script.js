@@ -13,6 +13,61 @@
   updateBackToTop();
 })();
 
+// 浮动目录使用原生锚点，仅在侧栏中标记当前分区；窄屏时可展开与收起。
+(() => {
+  const toc = document.querySelector("[data-floating-toc]");
+  if (!toc) return;
+  const toggle = toc.querySelector("[data-toc-toggle]");
+  const links = Array.from(toc.querySelectorAll("a[href^='#']"));
+  const entries = links.map((link) => ({
+    link,
+    section: document.getElementById(link.getAttribute("href").slice(1)),
+  })).filter((entry) => entry.section);
+  let framePending = false;
+
+  function setOpen(open) {
+    toc.dataset.open = String(open);
+    toggle.setAttribute("aria-expanded", String(open));
+  }
+
+  function updateCurrentSection() {
+    framePending = false;
+    const marker = Math.min(window.innerHeight * 0.28, 180);
+    let current = null;
+    for (const entry of entries) {
+      if (entry.section.getBoundingClientRect().top <= marker) current = entry;
+    }
+    if (current && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+      current = entries[entries.length - 1];
+    }
+    for (const entry of entries) {
+      if (entry === current) entry.link.setAttribute("aria-current", "location");
+      else entry.link.removeAttribute("aria-current");
+    }
+  }
+
+  function scheduleUpdate() {
+    if (framePending) return;
+    framePending = true;
+    window.requestAnimationFrame(updateCurrentSection);
+  }
+
+  toggle.addEventListener("click", () => setOpen(toc.dataset.open !== "true"));
+  for (const link of links) link.addEventListener("click", () => setOpen(false));
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || toc.dataset.open !== "true") return;
+    setOpen(false);
+    toggle.focus();
+  });
+  document.addEventListener("click", (event) => {
+    if (!toc.contains(event.target)) setOpen(false);
+  });
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  for (const event of ["resize", "load", "pageshow", "hashchange"]) window.addEventListener(event, scheduleUpdate);
+  window.matchMedia("(min-width: 1760px)").addEventListener("change", () => setOpen(false));
+  updateCurrentSection();
+})();
+
 // 路径直接保存在场景按钮上，无需 fetch，因此 file:// 离线打开也能切换。
 (() => {
   const gallery = document.querySelector("[data-showcase-gallery]");
@@ -382,16 +437,156 @@ function createFloorplanRenderer(video, crop) {
   return draw;
 }
 
-// One Image, Multiple Floorplans：每组由生成视频独立控制对应的 floorplan。
+// 四种风格和 floorplan 共用一条控制栏，以第一个生成视频为时间轴。
+function initializeSynchronizedStyles(group, videos, floorplan) {
+  const media = [...videos, floorplan];
+  const clockVideo = videos[0];
+  const controls = group.querySelector("[data-style-controls]");
+  const toggle = group.querySelector("[data-style-toggle]");
+  const scrubber = group.querySelector("[data-style-progress]");
+  const timeDisplay = group.querySelector("[data-style-time]");
+  const pendingPlays = new WeakMap();
+  const waiting = new Set();
+  let playing = false;
+  let position = 0;
+  let duration = 0;
+
+  // 保留 HTML 原生控件作为无 JavaScript 时的回退；初始化后只显示共用控件。
+  for (const video of videos) video.controls = false;
+  controls.hidden = false;
+
+  function formatTime(seconds) {
+    const wholeSeconds = Math.max(0, Math.floor(seconds));
+    return `${Math.floor(wholeSeconds / 60)}:${String(wholeSeconds % 60).padStart(2, "0")}`;
+  }
+
+  function updateControls() {
+    const label = playing ? "Pause all five videos" : "Play all five videos";
+    toggle.dataset.playing = String(playing);
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+    scrubber.disabled = duration === 0;
+    scrubber.max = String(duration || 1);
+    scrubber.value = String(position);
+    scrubber.setAttribute("aria-valuetext", `${formatTime(position)} of ${formatTime(duration)}`);
+    timeDisplay.textContent = `${formatTime(position)} / ${formatTime(duration)}`;
+  }
+
+  function shouldPlay(item) {
+    return playing && !clockVideo.seeking && !item.error && !item.ended &&
+      (!waiting.size || waiting.has(item)) &&
+      (!Number.isFinite(item.duration) || position < item.duration);
+  }
+
+  function play(item) {
+    if (!item.paused || pendingPlays.has(item)) return;
+    let interrupted = false;
+    const attempt = item.play();
+    pendingPlays.set(item, attempt);
+    attempt.then(() => {
+      if (!shouldPlay(item)) item.pause();
+    }).catch((error) => {
+      interrupted = error.name === "AbortError";
+      if (!interrupted) {
+        playing = false;
+        media.forEach((video) => video.pause());
+        updateControls();
+      }
+    }).finally(() => {
+      if (pendingPlays.get(item) !== attempt) return;
+      pendingPlays.delete(item);
+      if (interrupted && shouldPlay(item)) play(item);
+    });
+  }
+
+  function synchronize(force = false) {
+    for (const item of media) {
+      if (item.error) continue;
+      if (item.readyState >= 1 && Number.isFinite(item.duration)) {
+        const target = Math.min(position, item.duration);
+        if ((force || item !== clockVideo) && Math.abs(item.currentTime - target) > (force ? 0.01 : 0.15)) {
+          item.currentTime = target;
+        }
+      }
+      item.playbackRate = 1;
+      if (shouldPlay(item)) play(item);
+      else item.pause();
+    }
+    updateControls();
+  }
+
+  function prepareTimeline() {
+    duration = Number.isFinite(clockVideo.duration) ? clockVideo.duration : 0;
+    if (duration > 0) position = Math.min(position, duration);
+    synchronize(true);
+  }
+
+  toggle.addEventListener("click", () => {
+    if (playing && !clockVideo.seeking) position = clockVideo.currentTime;
+    playing = !playing;
+    if (playing && duration > 0 && position >= duration) position = 0;
+    waiting.clear();
+    synchronize(true);
+  });
+  scrubber.addEventListener("input", () => {
+    position = Math.max(0, Math.min(Number(scrubber.value), duration));
+    waiting.clear();
+    synchronize(true);
+  });
+
+  clockVideo.addEventListener("durationchange", prepareTimeline);
+  clockVideo.addEventListener("seeked", () => synchronize());
+  clockVideo.addEventListener("timeupdate", () => {
+    if (clockVideo.seeking) return;
+    position = Math.min(clockVideo.currentTime, duration || clockVideo.currentTime);
+    synchronize();
+  });
+  clockVideo.addEventListener("ended", () => {
+    if (!clockVideo.ended) return;
+    playing = false;
+    position = duration || clockVideo.currentTime;
+    waiting.clear();
+    synchronize(true);
+  });
+
+  for (const item of media) {
+    item.addEventListener("loadedmetadata", () => {
+      if (item === clockVideo) prepareTimeline();
+      else synchronize(true);
+    });
+    item.addEventListener("waiting", () => {
+      if (!playing || item.readyState >= 3) return;
+      position = clockVideo.currentTime;
+      waiting.add(item);
+      synchronize(true);
+    });
+    for (const event of ["canplay", "playing"]) {
+      item.addEventListener(event, () => {
+        if (item.readyState < 3) return;
+        waiting.delete(item);
+        synchronize();
+      });
+    }
+    item.addEventListener("error", () => {
+      playing = false;
+      media.forEach((video) => video.pause());
+      updateControls();
+    });
+  }
+  prepareTimeline();
+}
+
+// Generative diversity：单组生成视频控制对应 floorplan；多风格组同时播放五个视频。
 for (const pair of document.querySelectorAll("[data-floorplan-pair]")) {
-  const video = pair.querySelector("[data-pair-video]");
+  const videos = Array.from(pair.querySelectorAll("[data-pair-video]"));
+  let video = videos[0];
   const floorplan = pair.querySelector("[data-pair-floorplan]");
   const drawFloorplan = createFloorplanRenderer(floorplan, (pair.dataset.floorplanCrop || "").split(",").map(Number));
   let buffering = false;
   let pendingPlay = null;
 
   function shouldPlay() {
-    return !video.paused && !video.ended && !video.seeking && !buffering &&
+    return !video.paused && !video.ended && !video.seeking && !video.error && !buffering &&
       !floorplan.error && !floorplan.ended && video.currentTime < floorplan.duration;
   }
 
@@ -429,18 +624,52 @@ for (const pair of document.querySelectorAll("[data-floorplan-pair]")) {
     drawFloorplan();
   }
 
-  video.addEventListener("playing", () => { buffering = false; synchronize(true); });
-  video.addEventListener("waiting", () => { buffering = true; synchronize(); });
-  for (const name of ["pause", "seeking", "ended"]) {
-    video.addEventListener(name, () => synchronize(true));
-  }
-  video.addEventListener("seeked", () => { buffering = video.readyState < 3; synchronize(true); });
-  for (const name of ["timeupdate", "ratechange"]) {
-    video.addEventListener(name, () => synchronize());
-  }
-  floorplan.addEventListener("loadedmetadata", () => { fitFloorplan(); synchronize(true); });
-  floorplan.addEventListener("canplay", () => synchronize());
+  floorplan.addEventListener("loadedmetadata", fitFloorplan);
   if ("ResizeObserver" in window) new ResizeObserver(fitFloorplan).observe(floorplan.parentElement);
   window.addEventListener("resize", fitFloorplan);
   fitFloorplan();
+
+  if (videos.length > 1) {
+    initializeSynchronizedStyles(pair, videos, floorplan);
+    continue;
+  }
+
+  function activate(candidate) {
+    if (video !== candidate) {
+      video = candidate;
+      buffering = video.readyState < 3;
+      for (const other of videos) {
+        if (other !== video) other.pause();
+      }
+    }
+    synchronize(true);
+  }
+
+  for (const candidate of videos) {
+    candidate.addEventListener("play", () => activate(candidate));
+    candidate.addEventListener("seeking", () => activate(candidate));
+    candidate.addEventListener("playing", () => {
+      if (candidate !== video) return;
+      buffering = false;
+      synchronize(true);
+    });
+    candidate.addEventListener("waiting", () => {
+      if (candidate !== video) return;
+      buffering = true;
+      synchronize();
+    });
+    for (const name of ["pause", "ended", "error"]) {
+      candidate.addEventListener(name, () => { if (candidate === video) synchronize(true); });
+    }
+    candidate.addEventListener("seeked", () => {
+      if (candidate !== video) return;
+      buffering = video.readyState < 3;
+      synchronize(true);
+    });
+    for (const name of ["timeupdate", "ratechange"]) {
+      candidate.addEventListener(name, () => { if (candidate === video) synchronize(); });
+    }
+  }
+  floorplan.addEventListener("loadedmetadata", () => synchronize(true));
+  floorplan.addEventListener("canplay", () => synchronize());
 }

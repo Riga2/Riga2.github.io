@@ -12,9 +12,28 @@
 <body id="top">
   <a class="skip-link" href="#showcases">Skip to results</a>
 
+  <aside class="floating-toc" data-floating-toc data-open="false">
+    <button class="floating-toc-toggle" data-toc-toggle type="button" aria-expanded="false" aria-controls="floating-toc-links">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M7 5h10M7 10h10M7 15h10M3 5h.01M3 10h.01M3 15h.01" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      Contents
+    </button>
+    <nav class="floating-toc-panel" id="floating-toc-links" aria-label="Page contents">
+      <p class="floating-toc-heading">Contents</p>
+      <ul>
+        <li><a href="#overview">Demo video</a></li>
+        <li><a href="#showcases">Showcases</a></li>
+        <li><a href="#comparisons">Comparisons</a></li>
+        <li><a href="#ablation-study">Ablation study</a></li>
+        <li><a href="#one-image-multiple-floorplans">Generative diversity</a></li>
+        <li><a href="#palace-generation">Palace exploration</a></li>
+        <li><a href="#additional-videos">Additional videos</a></li>
+      </ul>
+    </nav>
+  </aside>
+
   <header class="publication-header">
     <h1>
-      <span class="title-line">IndoorMem: Floorplan as Spatial Scaffold</span>
+      <span class="title-line"><span class="title-brand"><svg class="title-logo" viewBox="502 262 640 486" aria-hidden="true" focusable="false"><image href="assets/indoormem-logo.png" width="1536" height="1024"/></svg><strong>IndoorMem</strong></span>: Floorplan as Spatial Scaffold</span>
       <span class="title-line">for Consistent Indoor Video Worlds</span>
     </h1>
     <p class="publication-subtitle">Supplementary Material</p>
@@ -27,8 +46,8 @@
         <a href="#ablation-study">Ablation study</a>
       </div>
       <div class="navigation-row">
-        <a href="#one-image-multiple-floorplans">One Image, Multiple Floorplans</a>
-        <a href="#palace-generation">Palace generation</a>
+        <a class="navigation-link-primary" href="#one-image-multiple-floorplans">Generative diversity</a>
+        <a class="navigation-link-primary" href="#palace-generation">Palace exploration</a>
         <a href="#additional-videos">Additional videos</a>
       </div>
     </nav>
@@ -49,12 +68,14 @@
       <img src="Variety/000000_832x480.png" alt="Description of the result" loading="lazy">
 
       路径相对于本文件；请使用本地相对路径，保持整个文件夹结构即可离线分享。
-      图注写在 figcaption 中。替换素材后，可直接删除 section-description 占位说明。
+      图注写在 figcaption 中；各分区标题下的 section-description 保持为一句简短说明。
       请在正式提交前检查新增的文字、图片、视频中是否包含作者身份信息。
     -->
 
-    <figure class="overview">
-      <video src="overview_video/overview_video.mp4?v=1fa5ecea4b27" poster="overview_video/previews/overview.jpg" aria-label="Overview of IndoorMem" width="1280" height="720" controls muted playsinline preload="metadata">
+    <p class="page-summary"><strong>TL;DR:</strong> We use a coarse floorplan as a shared spatial scaffold for <mark>recalling the past and guiding the future</mark>,<br>enabling consistent long-horizon indoor video generation.</p>
+
+    <figure class="overview" id="overview">
+      <video src="overview_video/demo_video.mp4?v=97446daf3453" poster="overview_video/previews/demo_video.jpg?v=55dd917ad067" aria-label="Overview of IndoorMem" width="1280" height="720" controls muted playsinline preload="metadata">
         Your browser does not support HTML video.
       </video>
       <figcaption>IndoorMem Demo Video</figcaption>
@@ -62,6 +83,7 @@
 
     <section class="results-section" id="showcases" aria-labelledby="showcases-title">
       <h2 id="showcases-title">Showcases</h2>
+      <p class="section-description">Our generated indoor videos <strong>maintain consistency</strong> and support plausible 3D point-cloud reconstruction.</p>
       <!--
         Showcases 使用 showcases/case1 至 case12 中的本地视频；可直接离线打开。
         每个场景按钮的 data-floorplan / data-reference / data-video / data-pointcloud 指向对应素材。
@@ -91,7 +113,7 @@
           <h3 class="showcase-label showcase-video-label" id="showcase-video-label">Generated video</h3>
           <h3 class="showcase-label showcase-pointcloud-label" id="showcase-pointcloud-label">Point cloud reconstructed from the generated video</h3>
           <div class="showcase-display showcase-video-display" id="showcase-video" role="group" aria-labelledby="showcase-video-label">
-            <video data-showcase-media="video" src="showcases/case1/video.mp4?v=68349e6146f3" poster="showcases/previews/case1-video.jpg" aria-label="Generated video — Scene 01" controls muted playsinline preload="metadata">
+            <video data-showcase-media="video" src="showcases/case1/video.mp4?v=c15fd1505a60" poster="showcases/previews/case1-video.jpg" aria-label="Generated video — Scene 01" controls muted playsinline preload="metadata">
               Your browser does not support HTML video.
             </video>
             <p class="showcase-media-error" data-media-error hidden role="status">This video could not be loaded.</p>
@@ -105,7 +127,7 @@
             </div>
           </div>
           <div class="showcase-display showcase-pointcloud-display" id="showcase-pointcloud" role="group" aria-labelledby="showcase-pointcloud-label">
-            <video data-showcase-media="pointcloud" src="showcases/case1/pc.mp4?v=0bcbe792574a" poster="showcases/previews/case1-pointcloud.jpg" aria-label="Point cloud reconstructed from the generated video — Scene 01" disablepictureinpicture tabindex="-1" muted playsinline preload="metadata">
+            <video data-showcase-media="pointcloud" src="showcases/case1/pc.mp4?v=1bbb0a2548c4" poster="showcases/previews/case1-pointcloud.jpg" aria-label="Point cloud reconstructed from the generated video — Scene 01" disablepictureinpicture tabindex="-1" muted playsinline preload="metadata">
               Your browser does not support HTML video.
             </video>
             <p class="showcase-media-error" data-media-error hidden role="status">This video could not be loaded.</p>
@@ -115,73 +137,73 @@
         <div class="showcase-selector" role="group" aria-label="Choose a showcase scene">
           <button class="showcase-thumbnail" type="button" data-scene="01"
             data-floorplan="showcases/case1/floorplan.mp4" data-floorplan-crop="832,480,318,0,208,480" data-reference="showcases/case1/ref.mp4"
-            data-video="showcases/case1/video.mp4?v=68349e6146f3" data-pointcloud="showcases/case1/pc.mp4?v=0bcbe792574a" data-poster-prefix="showcases/previews/case1"
+            data-video="showcases/case1/video.mp4?v=c15fd1505a60" data-pointcloud="showcases/case1/pc.mp4?v=1bbb0a2548c4" data-poster-prefix="showcases/previews/case1"
             aria-label="Show scene 01" aria-pressed="true" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case1-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="02"
             data-floorplan="showcases/case2/floorplan.mp4" data-floorplan-crop="832,480,168,0,474,480" data-reference="showcases/case2/ref.mp4"
-            data-video="showcases/case2/video.mp4?v=c0fa8ddf1f54" data-pointcloud="showcases/case2/pc.mp4?v=379f2256f7b6" data-poster-prefix="showcases/previews/case2"
+            data-video="showcases/case2/video.mp4?v=ab144ac3add3" data-pointcloud="showcases/case2/pc.mp4?v=0aab80eb75e4" data-poster-prefix="showcases/previews/case2"
             aria-label="Show scene 02" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case2-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="03"
             data-floorplan="showcases/case3/floorplan.mp4" data-floorplan-crop="832,480,214,0,411,480" data-reference="showcases/case3/ref.mp4"
-            data-video="showcases/case3/video.mp4?v=55048f3d26d9" data-pointcloud="showcases/case3/pc.mp4?v=1d03f15a9497" data-poster-prefix="showcases/previews/case3"
+            data-video="showcases/case3/video.mp4?v=6bf3dbcc7e07" data-pointcloud="showcases/case3/pc.mp4?v=730f9f61e6b3" data-poster-prefix="showcases/previews/case3"
             aria-label="Show scene 03" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case3-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="04"
             data-floorplan="showcases/case4/floorplan.mp4" data-floorplan-crop="832,480,61,0,691,480" data-reference="showcases/case4/ref.mp4"
-            data-video="showcases/case4/video.mp4?v=4c32d0eaaf9a" data-pointcloud="showcases/case4/pc.mp4?v=2b98868781c2" data-poster-prefix="showcases/previews/case4"
+            data-video="showcases/case4/video.mp4?v=d6fcd50078f5" data-pointcloud="showcases/case4/pc.mp4?v=688efa759121" data-poster-prefix="showcases/previews/case4"
             aria-label="Show scene 04" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case4-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="05"
             data-floorplan="showcases/case5/floorplan.mp4" data-floorplan-crop="832,480,243,1,364,478" data-reference="showcases/case5/ref.mp4"
-            data-video="showcases/case5/video.mp4?v=3cf531e7f3df" data-pointcloud="showcases/case5/pc.mp4?v=26038967235f" data-poster-prefix="showcases/previews/case5"
+            data-video="showcases/case5/video.mp4?v=a65b663ece75" data-pointcloud="showcases/case5/pc.mp4?v=bf5db6a416e2" data-poster-prefix="showcases/previews/case5"
             aria-label="Show scene 05" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case5-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="06"
             data-floorplan="showcases/case6/floorplan.mp4" data-floorplan-crop="832,480,263,0,295,480" data-reference="showcases/case6/ref.mp4"
-            data-video="showcases/case6/video.mp4?v=d4a1514d8c27" data-pointcloud="showcases/case6/pc.mp4?v=713c9bffc590" data-poster-prefix="showcases/previews/case6"
+            data-video="showcases/case6/video.mp4?v=4a3e7df55d47" data-pointcloud="showcases/case6/pc.mp4?v=17f5d1c181bd" data-poster-prefix="showcases/previews/case6"
             aria-label="Show scene 06" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case6-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="07"
             data-floorplan="showcases/case7/floorplan.mp4" data-floorplan-crop="832,480,146,2,555,478" data-reference="showcases/case7/ref.mp4"
-            data-video="showcases/case7/video.mp4?v=5e237a28c3e9" data-pointcloud="showcases/case7/pc.mp4?v=a11f429b1546" data-poster-prefix="showcases/previews/case7"
+            data-video="showcases/case7/video.mp4?v=4d3ba1664821" data-pointcloud="showcases/case7/pc.mp4?v=40ab390c36fd" data-poster-prefix="showcases/previews/case7"
             aria-label="Show scene 07" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case7-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="08"
             data-floorplan="showcases/case8/floorplan.mp4" data-floorplan-crop="832,480,179,0,475,480" data-reference="showcases/case8/ref.mp4"
-            data-video="showcases/case8/video.mp4?v=8ca646a8f108" data-pointcloud="showcases/case8/pc.mp4?v=8c63f84d5be5" data-poster-prefix="showcases/previews/case8"
+            data-video="showcases/case8/video.mp4?v=a4fc16587328" data-pointcloud="showcases/case8/pc.mp4?v=bec6a6ff9aaf" data-poster-prefix="showcases/previews/case8"
             aria-label="Show scene 08" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case8-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="09"
             data-floorplan="showcases/case9/floorplan.mp4" data-floorplan-crop="832,480,170,2,485,477" data-reference="showcases/case9/ref.mp4"
-            data-video="showcases/case9/video.mp4?v=1ab7ffe0a6ee" data-pointcloud="showcases/case9/pc.mp4?v=13932b516268" data-poster-prefix="showcases/previews/case9"
+            data-video="showcases/case9/video.mp4?v=2cbebe4d759c" data-pointcloud="showcases/case9/pc.mp4?v=558863a2cb02" data-poster-prefix="showcases/previews/case9"
             aria-label="Show scene 09" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case9-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="10"
             data-floorplan="showcases/case10/floorplan.mp4" data-floorplan-crop="832,480,139,0,558,480" data-reference="showcases/case10/ref.mp4"
-            data-video="showcases/case10/video.mp4?v=6cc793f8dd27" data-pointcloud="showcases/case10/pc.mp4?v=04a344168d68" data-poster-prefix="showcases/previews/case10"
+            data-video="showcases/case10/video.mp4?v=63f6f460b7c0" data-pointcloud="showcases/case10/pc.mp4?v=9b926624c013" data-poster-prefix="showcases/previews/case10"
             aria-label="Show scene 10" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case10-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="11"
             data-floorplan="showcases/case11/floorplan.mp4" data-floorplan-crop="832,480,251,0,330,480" data-reference="showcases/case11/ref.mp4"
-            data-video="showcases/case11/video.mp4?v=081114f98d4b" data-pointcloud="showcases/case11/pc.mp4?v=65271f65a2d5" data-poster-prefix="showcases/previews/case11"
+            data-video="showcases/case11/video.mp4?v=a32b9c8e2761" data-pointcloud="showcases/case11/pc.mp4?v=9f6953cb5f2f" data-poster-prefix="showcases/previews/case11"
             aria-label="Show scene 11" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case11-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
           <button class="showcase-thumbnail" type="button" data-scene="12"
             data-floorplan="showcases/case12/floorplan.mp4" data-floorplan-crop="832,480,143,2,546,477" data-reference="showcases/case12/ref.mp4"
-            data-video="showcases/case12/video.mp4?v=5292168f8f8d" data-pointcloud="showcases/case12/pc.mp4?v=bf7225de7c08" data-poster-prefix="showcases/previews/case12"
+            data-video="showcases/case12/video.mp4?v=fbdc7f868fed" data-pointcloud="showcases/case12/pc.mp4?v=d12382a1dbce" data-poster-prefix="showcases/previews/case12"
             aria-label="Show scene 12" aria-pressed="false" aria-controls="showcase-floorplan showcase-reference showcase-video showcase-pointcloud">
             <img src="showcases/previews/case12-video.jpg" alt="" width="640" height="369" loading="lazy">
           </button>
@@ -194,27 +216,28 @@
 
     <section class="results-section" id="comparisons" aria-labelledby="comparisons-title">
       <h2 id="comparisons-title">Comparisons</h2>
+      <p class="section-description">Our method <strong>maintains revisit consistency</strong>, while others struggle during extensive exploration.</p>
       <!-- 直接读取 comparisons 中的 MP4；点击缩略图手动切换 case，播完停在最后一帧；封面使用对应视频的第一帧。 -->
       <!-- 替换同名视频后，运行 python3 scripts/prepare_comparisons.py 在原文件上去音轨，并更新封面与缓存标识。 -->
       <div class="comparison-gallery" data-comparison-gallery>
         <div class="comparison-player">
-          <video id="comparison-video" data-comparison-video src="comparisons/gen2_003_comp.mp4?v=7b7b6f34c07f" poster="comparisons/previews/gen2_003_comp.jpg?v=5c6c3259a705" aria-label="Comparison video — Case 01" width="1280" height="720" controls muted playsinline preload="metadata">
+          <video id="comparison-video" data-comparison-video src="comparisons/comp_case1_v2.mp4?v=8cda7f8f45d2" poster="comparisons/previews/comp_case1_v2.jpg?v=eb159317cebe" aria-label="Comparison video — Case 01" width="1280" height="720" controls muted playsinline preload="metadata">
             Your browser does not support HTML video.
           </video>
         </div>
         <p class="comparison-error" data-comparison-error hidden role="status">This comparison video could not be loaded. Please select another case.</p>
         <div class="comparison-selector" role="group" aria-label="Choose a comparison case">
-          <button class="comparison-thumbnail" type="button" data-comparison-case="01" data-video="comparisons/gen2_003_comp.mp4?v=7b7b6f34c07f" data-poster="comparisons/previews/gen2_003_comp.jpg?v=5c6c3259a705"
+          <button class="comparison-thumbnail" type="button" data-comparison-case="01" data-video="comparisons/comp_case1_v2.mp4?v=8cda7f8f45d2" data-poster="comparisons/previews/comp_case1_v2.jpg?v=eb159317cebe"
             aria-label="Show comparison case 01" aria-pressed="true" aria-controls="comparison-video">
-            <img src="comparisons/previews/gen2_003_comp.jpg?v=5c6c3259a705" alt="" width="1280" height="720" loading="lazy">
+            <img src="comparisons/previews/comp_case1_v2.jpg?v=eb159317cebe" alt="" width="1280" height="720" loading="lazy">
           </button>
-          <button class="comparison-thumbnail" type="button" data-comparison-case="02" data-video="comparisons/0362399_comp.mp4?v=5a2be2b30a01" data-poster="comparisons/previews/0362399_comp.jpg?v=1c79d612e822"
+          <button class="comparison-thumbnail" type="button" data-comparison-case="02" data-video="comparisons/comp_case3_v2.mp4?v=b5d022e49258" data-poster="comparisons/previews/comp_case3_v2.jpg?v=7027dd507edc"
             aria-label="Show comparison case 02" aria-pressed="false" aria-controls="comparison-video">
-            <img src="comparisons/previews/0362399_comp.jpg?v=1c79d612e822" alt="" width="1280" height="720" loading="lazy">
+            <img src="comparisons/previews/comp_case3_v2.jpg?v=7027dd507edc" alt="" width="1280" height="720" loading="lazy">
           </button>
-          <button class="comparison-thumbnail" type="button" data-comparison-case="03" data-video="comparisons/01b08_comp.mp4?v=e0ca28973de1" data-poster="comparisons/previews/01b08_comp.jpg?v=3dbc4f9b1c00"
+          <button class="comparison-thumbnail" type="button" data-comparison-case="03" data-video="comparisons/comp_case2_v2.mp4?v=d5e3c90946c2" data-poster="comparisons/previews/comp_case2_v2.jpg?v=4b0b83280c87"
             aria-label="Show comparison case 03" aria-pressed="false" aria-controls="comparison-video">
-            <img src="comparisons/previews/01b08_comp.jpg?v=3dbc4f9b1c00" alt="" width="1280" height="720" loading="lazy">
+            <img src="comparisons/previews/comp_case2_v2.jpg?v=4b0b83280c87" alt="" width="1280" height="720" loading="lazy">
           </button>
         </div>
         <p class="visually-hidden" data-comparison-status role="status" aria-live="polite">Comparison case 01 selected.</p>
@@ -224,6 +247,7 @@
 
     <section class="results-section" id="ablation-study" aria-labelledby="ablation-study-title">
       <h2 id="ablation-study-title">Ablation study</h2>
+      <p class="section-description">Memory, layout-aware guidance, and semantic labels support <strong>consistent and coherent generation.</strong></p>
       <!-- 按 Memory → Layout → Semantic 排列，手动切换主题，播完停在最后一帧；直接读取 ablations 原视频，封面为第一帧。 -->
       <!-- 替换视频后运行 python3 scripts/prepare_ablations.py，直接去音轨并更新首帧封面、尺寸与缓存标识。 -->
       <div class="ablation-gallery" data-ablation-gallery>
@@ -260,78 +284,143 @@
     </section>
 
     <section class="results-section multi-floorplans-section" id="one-image-multiple-floorplans" aria-labelledby="one-image-multiple-floorplans-title">
-      <h2 id="one-image-multiple-floorplans-title">One Image, Multiple Floorplans</h2>
-      <figure class="multi-floorplan-reference">
-        <img src="multi_floorplans/000000_832x480.png" alt="Shared input image of a living room" width="832" height="480" loading="lazy">
-        <figcaption>Input image</figcaption>
-      </figure>
-      <!-- 共用一张参考图；每组生成视频的原生控件同步控制对应 floorplan。 -->
-      <div class="multi-floorplan-grid">
-        <div class="multi-floorplan-case" data-floorplan-pair data-floorplan="multi_floorplans/topdown.mp4" data-floorplan-crop="832,480,171,0,498,480" data-poster-prefix="multi_floorplans/previews/01" role="group" aria-labelledby="multi-floorplan-01-title">
-          <h3 class="multi-floorplan-label multi-floorplan-plan-label" id="multi-floorplan-01-title">Floorplan 01</h3>
-          <h3 class="multi-floorplan-label multi-floorplan-video-label">Generated video</h3>
-          <div class="multi-floorplan-plan">
-            <video data-pair-floorplan src="multi_floorplans/topdown.mp4" poster="multi_floorplans/previews/01-floorplan.jpg" aria-label="Floorplan 01 animation" muted playsinline preload="metadata" disablepictureinpicture tabindex="-1">
-              Your browser does not support HTML video.
-            </video>
+      <h2 id="one-image-multiple-floorplans-title">Generative diversity</h2>
+      <p class="section-description">Our method enables <strong>diverse styles</strong> within a shared floorplan and <strong>diverse layouts</strong> from a single input image.</p>
+      <section class="generative-subsection" aria-labelledby="multiple-styles-subtitle">
+        <h3 class="generative-subsection-title" id="multiple-styles-subtitle">One floorplan, multiple styles</h3>
+        <div class="multi-style-gallery" data-floorplan-pair data-floorplan="showcases/case7/floorplan.mp4" data-floorplan-crop="832,480,146,2,555,478">
+          <div class="multi-style-input">
+            <h4 class="multi-floorplan-label multi-floorplan-plan-label">Shared floorplan &amp; trajectory</h4>
+            <div class="multi-floorplan-plan multi-style-plan">
+              <video data-pair-floorplan src="showcases/case7/floorplan.mp4?v=c82344d17272" poster="multi_styles/previews/floorplan.png" aria-label="Shared floorplan and trajectory for all four styles" muted playsinline preload="metadata" disablepictureinpicture tabindex="-1">
+                Your browser does not support HTML video.
+              </video>
+            </div>
           </div>
-          <div class="multi-floorplan-result">
-            <video data-pair-video src="multi_floorplans/video.mp4?v=089558291b71" poster="multi_floorplans/previews/01-video.jpg" aria-label="Generated video for floorplan 01" aria-describedby="multi-floorplan-playback-help" width="832" height="480" controls muted playsinline preload="none">
-              Your browser does not support HTML video.
-            </video>
+          <div class="multi-style-grid">
+            <div class="multi-style-card">
+              <h4 class="multi-style-title" id="multi-style-01-title">Japanese wabi-sabi style</h4>
+              <div class="multi-floorplan-result">
+                <video data-pair-video src="multi_styles/1.mp4?v=913110374315" poster="multi_styles/previews/1.jpg" aria-labelledby="multi-style-01-title" aria-describedby="multi-style-playback-help" width="832" height="480" controls muted playsinline preload="metadata">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+            </div>
+            <div class="multi-style-card">
+              <h4 class="multi-style-title" id="multi-style-02-title">Chinese Ming style</h4>
+              <div class="multi-floorplan-result">
+                <video data-pair-video src="multi_styles/2.mp4?v=47c69f506adb" poster="multi_styles/previews/2.jpg" aria-labelledby="multi-style-02-title" aria-describedby="multi-style-playback-help" width="832" height="480" controls muted playsinline preload="none">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+            </div>
+            <div class="multi-style-card">
+              <h4 class="multi-style-title" id="multi-style-03-title">Art Nouveau style</h4>
+              <div class="multi-floorplan-result">
+                <video data-pair-video src="multi_styles/3.mp4?v=08473c16004f" poster="multi_styles/previews/3.jpg" aria-labelledby="multi-style-03-title" aria-describedby="multi-style-playback-help" width="832" height="480" controls muted playsinline preload="none">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+            </div>
+            <div class="multi-style-card">
+              <h4 class="multi-style-title" id="multi-style-04-title">European coastal style</h4>
+              <div class="multi-floorplan-result">
+                <video data-pair-video src="multi_styles/4.mp4?v=3b4cd904ffb8" poster="multi_styles/previews/4.jpg" aria-labelledby="multi-style-04-title" aria-describedby="multi-style-playback-help" width="832" height="480" controls muted playsinline preload="none">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="multi-floorplan-case" data-floorplan-pair data-floorplan="multi_floorplans/04_topdown.mp4" data-floorplan-crop="832,480,0,1,832,479" data-poster-prefix="multi_floorplans/previews/02" role="group" aria-labelledby="multi-floorplan-02-title">
-          <h3 class="multi-floorplan-label multi-floorplan-plan-label" id="multi-floorplan-02-title">Floorplan 02</h3>
-          <h3 class="multi-floorplan-label multi-floorplan-video-label">Generated video</h3>
-          <div class="multi-floorplan-plan">
-            <video data-pair-floorplan src="multi_floorplans/04_topdown.mp4" poster="multi_floorplans/previews/02-floorplan.jpg" aria-label="Floorplan 02 animation" muted playsinline preload="metadata" disablepictureinpicture tabindex="-1">
-              Your browser does not support HTML video.
-            </video>
-          </div>
-          <div class="multi-floorplan-result">
-            <video data-pair-video src="multi_floorplans/04.mp4?v=fb65a694a872" poster="multi_floorplans/previews/02-video.jpg" aria-label="Generated video for floorplan 02" aria-describedby="multi-floorplan-playback-help" width="832" height="480" controls muted playsinline preload="none">
-              Your browser does not support HTML video.
-            </video>
-          </div>
-        </div>
-        <div class="multi-floorplan-case" data-floorplan-pair data-floorplan="multi_floorplans/05_topdown.mp4" data-floorplan-crop="832,480,41,2,692,478" data-poster-prefix="multi_floorplans/previews/03" role="group" aria-labelledby="multi-floorplan-03-title">
-          <h3 class="multi-floorplan-label multi-floorplan-plan-label" id="multi-floorplan-03-title">Floorplan 03</h3>
-          <h3 class="multi-floorplan-label multi-floorplan-video-label">Generated video</h3>
-          <div class="multi-floorplan-plan">
-            <video data-pair-floorplan src="multi_floorplans/05_topdown.mp4" poster="multi_floorplans/previews/03-floorplan.jpg" aria-label="Floorplan 03 animation" muted playsinline preload="metadata" disablepictureinpicture tabindex="-1">
-              Your browser does not support HTML video.
-            </video>
-          </div>
-          <div class="multi-floorplan-result">
-            <video data-pair-video src="multi_floorplans/05.mp4?v=ca069849832c" poster="multi_floorplans/previews/03-video.jpg" aria-label="Generated video for floorplan 03" aria-describedby="multi-floorplan-playback-help" width="832" height="480" controls muted playsinline preload="none">
-              Your browser does not support HTML video.
-            </video>
-          </div>
-        </div>
-        <div class="multi-floorplan-case" data-floorplan-pair data-floorplan="multi_floorplans/06_topdown.mp4" data-floorplan-crop="832,480,0,1,832,479" data-poster-prefix="multi_floorplans/previews/04" role="group" aria-labelledby="multi-floorplan-04-title">
-          <h3 class="multi-floorplan-label multi-floorplan-plan-label" id="multi-floorplan-04-title">Floorplan 04</h3>
-          <h3 class="multi-floorplan-label multi-floorplan-video-label">Generated video</h3>
-          <div class="multi-floorplan-plan">
-            <video data-pair-floorplan src="multi_floorplans/06_topdown.mp4" poster="multi_floorplans/previews/04-floorplan.jpg" aria-label="Floorplan 04 animation" muted playsinline preload="metadata" disablepictureinpicture tabindex="-1">
-              Your browser does not support HTML video.
-            </video>
-          </div>
-          <div class="multi-floorplan-result">
-            <video data-pair-video src="multi_floorplans/06.mp4?v=2c17e74d116c" poster="multi_floorplans/previews/04-video.jpg" aria-label="Generated video for floorplan 04" aria-describedby="multi-floorplan-playback-help" width="832" height="480" controls muted playsinline preload="none">
-              Your browser does not support HTML video.
-            </video>
+          <div class="multi-style-controls" data-style-controls role="group" aria-label="Playback controls for all five videos" hidden>
+            <button class="showcase-toggle multi-style-toggle" data-style-toggle data-playing="false" type="button" aria-label="Play all five videos" title="Play all five videos">
+              <svg class="showcase-play-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+              <svg class="showcase-pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+            </button>
+            <input class="showcase-progress multi-style-progress" data-style-progress type="range" min="0" max="1" step="0.01" value="0" aria-label="Playback progress for all five videos" disabled>
+            <span class="showcase-time" data-style-time>0:00 / 0:00</span>
           </div>
         </div>
-      </div>
-      <p class="visually-hidden" id="multi-floorplan-playback-help">The generated video controls also play, pause, and seek the matching floorplan animation. Each pair stops when its generated video ends.</p>
-      <noscript><p class="showcase-noscript">Enable JavaScript to synchronize the floorplan animations. Generated videos can still be played individually.</p></noscript>
+        <p class="visually-hidden" id="multi-style-playback-help">Use the shared play/pause button and progress bar to control all four styles and the shared floorplan and trajectory together. All videos stop at the end.</p>
+        <noscript><p class="showcase-noscript">Enable JavaScript to play all styles and the shared floorplan together. Style videos can still be played individually.</p></noscript>
+      </section>
+
+      <section class="generative-subsection" aria-labelledby="multiple-floorplans-subtitle">
+        <h3 class="generative-subsection-title" id="multiple-floorplans-subtitle">One image, multiple floorplans</h3>
+        <div class="multi-floorplan-gallery">
+          <figure class="multi-floorplan-reference">
+            <img src="multi_floorplans/000000_832x480.png" alt="Shared input image of a living room" width="832" height="480" loading="lazy">
+            <figcaption>Shared input image</figcaption>
+          </figure>
+          <!-- 共用一张参考图；每组生成视频的原生控件同步控制对应 floorplan。 -->
+          <div class="multi-floorplan-grid">
+            <div class="multi-floorplan-case" data-floorplan-pair data-floorplan="multi_floorplans/topdown.mp4" data-floorplan-crop="832,480,171,0,498,480" data-poster-prefix="multi_floorplans/previews/01" role="group" aria-labelledby="multi-floorplan-01-title">
+              <h4 class="multi-floorplan-label multi-floorplan-plan-label" id="multi-floorplan-01-title">Floorplan 01</h4>
+              <h4 class="multi-floorplan-label multi-floorplan-video-label">Generated video</h4>
+              <div class="multi-floorplan-plan">
+                <video data-pair-floorplan src="multi_floorplans/topdown.mp4" poster="multi_floorplans/previews/01-floorplan.jpg" aria-label="Floorplan 01 animation" muted playsinline preload="metadata" disablepictureinpicture tabindex="-1">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+              <div class="multi-floorplan-result">
+                <video data-pair-video src="multi_floorplans/video.mp4?v=00234dc4fae6" poster="multi_floorplans/previews/01-video.jpg" aria-label="Generated video for floorplan 01" aria-describedby="multi-floorplan-playback-help" width="832" height="480" controls muted playsinline preload="none">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+            </div>
+            <div class="multi-floorplan-case" data-floorplan-pair data-floorplan="multi_floorplans/04_topdown.mp4" data-floorplan-crop="832,480,0,1,832,479" data-poster-prefix="multi_floorplans/previews/02" role="group" aria-labelledby="multi-floorplan-02-title">
+              <h4 class="multi-floorplan-label multi-floorplan-plan-label" id="multi-floorplan-02-title">Floorplan 02</h4>
+              <h4 class="multi-floorplan-label multi-floorplan-video-label">Generated video</h4>
+              <div class="multi-floorplan-plan">
+                <video data-pair-floorplan src="multi_floorplans/04_topdown.mp4" poster="multi_floorplans/previews/02-floorplan.jpg" aria-label="Floorplan 02 animation" muted playsinline preload="metadata" disablepictureinpicture tabindex="-1">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+              <div class="multi-floorplan-result">
+                <video data-pair-video src="multi_floorplans/04.mp4?v=7efc5e7934eb" poster="multi_floorplans/previews/02-video.jpg" aria-label="Generated video for floorplan 02" aria-describedby="multi-floorplan-playback-help" width="832" height="480" controls muted playsinline preload="none">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+            </div>
+            <div class="multi-floorplan-case" data-floorplan-pair data-floorplan="multi_floorplans/05_topdown.mp4" data-floorplan-crop="832,480,41,2,692,478" data-poster-prefix="multi_floorplans/previews/03" role="group" aria-labelledby="multi-floorplan-03-title">
+              <h4 class="multi-floorplan-label multi-floorplan-plan-label" id="multi-floorplan-03-title">Floorplan 03</h4>
+              <h4 class="multi-floorplan-label multi-floorplan-video-label">Generated video</h4>
+              <div class="multi-floorplan-plan">
+                <video data-pair-floorplan src="multi_floorplans/05_topdown.mp4" poster="multi_floorplans/previews/03-floorplan.jpg" aria-label="Floorplan 03 animation" muted playsinline preload="metadata" disablepictureinpicture tabindex="-1">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+              <div class="multi-floorplan-result">
+                <video data-pair-video src="multi_floorplans/05.mp4?v=ff67dc421be2" poster="multi_floorplans/previews/03-video.jpg" aria-label="Generated video for floorplan 03" aria-describedby="multi-floorplan-playback-help" width="832" height="480" controls muted playsinline preload="none">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+            </div>
+            <div class="multi-floorplan-case" data-floorplan-pair data-floorplan="multi_floorplans/06_topdown.mp4" data-floorplan-crop="832,480,0,1,832,479" data-poster-prefix="multi_floorplans/previews/04" role="group" aria-labelledby="multi-floorplan-04-title">
+              <h4 class="multi-floorplan-label multi-floorplan-plan-label" id="multi-floorplan-04-title">Floorplan 04</h4>
+              <h4 class="multi-floorplan-label multi-floorplan-video-label">Generated video</h4>
+              <div class="multi-floorplan-plan">
+                <video data-pair-floorplan src="multi_floorplans/06_topdown.mp4" poster="multi_floorplans/previews/04-floorplan.jpg" aria-label="Floorplan 04 animation" muted playsinline preload="metadata" disablepictureinpicture tabindex="-1">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+              <div class="multi-floorplan-result">
+                <video data-pair-video src="multi_floorplans/06.mp4?v=32e422c9d88c" poster="multi_floorplans/previews/04-video.jpg" aria-label="Generated video for floorplan 04" aria-describedby="multi-floorplan-playback-help" width="832" height="480" controls muted playsinline preload="none">
+                  Your browser does not support HTML video.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="visually-hidden" id="multi-floorplan-playback-help">The generated video controls also play, pause, and seek the matching floorplan animation. Each pair stops when its generated video ends.</p>
+        <noscript><p class="showcase-noscript">Enable JavaScript to synchronize the floorplan animations. Generated videos can still be played individually.</p></noscript>
+      </section>
     </section>
 
     <section class="results-section" id="palace-generation" aria-labelledby="palace-generation-title">
-      <h2 id="palace-generation-title">Palace generation</h2>
+      <h2 id="palace-generation-title">Palace exploration</h2>
+      <p class="section-description">Our method enables continuous and consistent exploration of a <strong>large-scale palace</strong> for <strong>over two minutes</strong>.</p>
       <figure class="palace-video">
-        <video src="longvid/palace.mp4?v=055aff397b35" poster="longvid/previews/palace.jpg" aria-label="Palace generation video" width="832" height="480" controls muted playsinline preload="none">
+        <video src="longvid/palace.mp4?v=055aff397b35" poster="longvid/previews/palace.jpg" aria-label="Palace exploration video" width="832" height="480" controls muted playsinline preload="none">
           Your browser does not support HTML video.
         </video>
       </figure>
@@ -339,6 +428,7 @@
 
     <section class="results-section additional-videos-section" id="additional-videos" aria-labelledby="additional-videos-title">
       <h2 id="additional-videos-title">Additional videos</h2>
+      <p class="section-description">Our method supports <strong>a wide range</strong> of indoor scenes and visual styles.</p>
       <!-- 独立视频展示：复制 figure 可添加素材；更新 src 与 poster 即可，各自独立播放。 -->
       <div class="additional-video-grid">
         <figure class="additional-video-card">
