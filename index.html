@@ -25,7 +25,7 @@
               <p>I am a first-year PhD student at <a href="https://www.monash.edu/">Monash University</a>, where I am supervised by <a href="https://ttwong12.github.io/myself.html">Prof. TT Wong</a> and <a href="https://jianfei-cai.github.io/">Prof. Jianfei Cai</a>. 
                 I completed my Master's Degree in June 2025 at <a href="https://en.sdu.edu.cn/">Shandong University</a>, majoring in Software Engineering, under the supervision of <a href="https://wanglusdu.github.io/">Prof. Lu Wang</a> and <a href="https://wangningbei.github.io/">Prof. Beibei Wang</a>. 
               </p>
-              <p>  My research interests primarily focus on <b>3D & Video & GenAI</b>.
+              <p>  My research interests primarily focus on <b>Video & 3D & GenAI</b>.
               </p>
               <p>Always looking for <b>research collaborations & internships</b>. If you are interested, feel free to reach out!</p>
               <p style="text-align:center">
@@ -53,9 +53,41 @@
 
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
-          <tr>
+          <tr onmouseenter="this.querySelector('video').play().catch(() => {});" onmouseleave="const video = this.querySelector('video'); video.pause(); video.currentTime = 0;">
               <td style="padding:20px;width:35%;vertical-align:middle">
-                    <video muted loop="loop" width="250px" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;" onloadedmetadata="this.playbackRate = 4.0">
+                  <a href="indoormem/" aria-label="IndoorMem project page">
+                      <video muted loop playsinline preload="none" width="250" height="144" style="max-width:100%;height:auto;" poster="indoormem/showcases/previews/case1-video.jpg" aria-label="IndoorMem generated indoor scene preview" onloadedmetadata="this.playbackRate = 4.0">
+                          <source src="indoormem/showcases/case1/video.mp4" type="video/mp4">
+                      </video>
+                  </a>
+              </td>
+              <td width="75%" valign="middle">
+                  <p>
+                  <a href="https://riga2.github.io/indoormem/">
+                      <papertitle>IndoorMem: Floorplan as Spatial Scaffold for Consistent Indoor Video Worlds</papertitle>
+                  </a>
+                  <br>
+                  <strong>Jia Li</strong>,
+                  <a href="https://yihangchen-ee.github.io/">Yihang Chen</a>,
+                  <a href="https://wolfball.github.io/">Han Yan</a>,
+                  <a href="https://maxin-cn.github.io/">Xin Ma</a>,
+                  <a href="https://github.com/Aixile">Yanghua Jin</a>,
+                  <a href="https://jianfei-cai.github.io/">Jianfei Cai</a>,
+                  <a href="https://ttwong12.github.io/myself.html">Tien-Tsin Wong</a>
+                  <br>
+                  <em>Arxiv</em>, 2026
+                  </p>
+                  <div class="paper" id="jia2026indoormem">
+                      <a href="https://riga2.github.io/indoormem/">project page</a>
+                      <!-- <a href="">paper</a> /
+                      <a href="">code</a> -->
+                  </div>
+              </td>
+          </tr> <!--jia2026indoormem-->
+
+          <tr onmouseenter="this.querySelector('video').play().catch(() => {});" onmouseleave="const video = this.querySelector('video'); video.pause(); video.currentTime = 0;">
+              <td style="padding:20px;width:35%;vertical-align:middle">
+                    <video muted loop="loop" width="250px" onloadedmetadata="this.playbackRate = 4.0">
                         <source src="i3dm/imgs/0b55abc1ca2fe909.mp4" type="video/mp4">
                     </video>
               </td>

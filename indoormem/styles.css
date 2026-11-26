@@ -130,13 +130,68 @@ h1 strong { font-weight: 700; }
   vertical-align: -0.13em;
 }
 
-.publication-subtitle {
-  margin: 18px 0 25px;
-  font-size: 1.625rem;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.025em;
+.publication-authors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 20px;
+  margin: 22px 0 8px;
+  padding: 0;
+  list-style: none;
+  font-size: 1.25rem;
 }
+
+.publication-authors li,
+.publication-affiliations span { white-space: nowrap; }
+
+.publication-authors a {
+  color: #1767e8;
+  text-decoration: none;
+}
+
+.publication-authors a:hover { text-decoration: underline; }
+
+.publication-authors sup,
+.publication-affiliations sup {
+  font-size: 0.7em;
+  line-height: 0;
+}
+
+.publication-affiliations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 24px;
+  margin: 0 0 25px;
+  font-size: 1.125rem;
+}
+
+.publication-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.publication-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 116px;
+  min-height: 44px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: #363636;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 160ms;
+}
+
+.publication-links svg { flex-shrink: 0; }
 
 .section-navigation {
   display: flex;
@@ -173,6 +228,8 @@ h1 strong { font-weight: 700; }
 }
 
 @media (hover: hover) {
+  .publication-links a:hover { background: #171717; }
+
   .section-navigation a:hover {
     background: #f6f6f6;
     border-color: #aaa;
@@ -837,7 +894,8 @@ figure video { background: #111; }
   .publication-header { padding: 38px 20px 32px; }
   h1 { font-size: 2rem; letter-spacing: -0.03em; }
   .title-line { display: inline; }
-  .publication-subtitle { font-size: 1.375rem; margin: 18px 0 24px; }
+  .publication-authors { gap: 6px 16px; font-size: 1.125rem; }
+  .publication-affiliations { gap: 4px 16px; font-size: 1rem; }
   .navigation-row { gap: 8px; }
   .section-navigation a { padding: 8px 15px; font-size: 0.9375rem; }
   .content { width: calc(100% - 36px); }

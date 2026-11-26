@@ -37,9 +37,32 @@
       <span class="title-line"><span class="title-brand"><svg class="title-logo" viewBox="502 262 640 486" aria-hidden="true" focusable="false"><image href="assets/indoormem-logo.png" width="1536" height="1024"/></svg><strong>IndoorMem</strong></span>: Floorplan as Spatial Scaffold</span>
       <span class="title-line">for Consistent Indoor Video Worlds</span>
     </h1>
-    <p class="publication-subtitle">Supplementary Material</p>
+    <ul class="publication-authors" aria-label="Authors">
+      <li><a href="https://riga2.github.io/">Jia Li</a><sup>1</sup></li>
+      <li><a href="https://yihangchen-ee.github.io/">Yihang Chen</a><sup>1</sup></li>
+      <li><a href="https://wolfball.github.io/">Han Yan</a><sup>2</sup></li>
+      <li><a href="https://maxin-cn.github.io/">Xin Ma</a><sup>1</sup></li>
+      <li><a href="https://github.com/Aixile">Yanghua Jin</a><sup>3</sup></li>
+      <li><a href="https://jianfei-cai.github.io/">Jianfei Cai</a><sup>1</sup></li>
+      <li><a href="https://ttwong12.github.io/myself.html">Tien-Tsin Wong</a><sup>1</sup></li>
+    </ul>
+    <p class="publication-affiliations">
+      <span><sup>1</sup> Monash University</span>
+      <span><sup>2</sup> SJTU</span>
+      <span><sup>3</sup> Spellbrush</span>
+    </p>
 
-    <!-- 导航文字可以修改；href 必须与下方对应 section 的 id 一致。 -->
+    <nav class="publication-links" aria-label="Publication resources">
+      <a href="">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+        Paper
+      </a>
+      <a href="">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7-5 5 5 5m10-10 5 5-5 5m-3-14-4 18"/></svg>
+        Codes
+      </a>
+    </nav>
+
     <nav class="section-navigation" aria-label="Supplementary material sections">
       <div class="navigation-row navigation-row-primary">
         <a href="#showcases">Showcases</a>
@@ -55,24 +78,6 @@
   </header>
 
   <main class="content">
-    <!--
-      本页面可直接双击 index.html 离线打开，无需安装依赖或启动服务器。
-      Overview 与各结果区块已接入本地素材；可复制 figure 添加结果。
-
-      填入视频：将对应的 <div class="media-placeholder">...</div> 整块替换为：
-      <video controls muted loop playsinline preload="metadata">
-        <source src="Variety/video.mp4" type="video/mp4">
-        Your browser does not support HTML video.
-      </video>
-
-      填入图片：将同样的占位 div 替换为：
-      <img src="Variety/000000_832x480.png" alt="Description of the result" loading="lazy">
-
-      路径相对于本文件；请使用本地相对路径，保持整个文件夹结构即可离线分享。
-      图注写在 figcaption 中；各分区标题下的 section-description 保持为一句简短说明。
-      请在正式提交前检查新增的文字、图片、视频中是否包含作者身份信息。
-    -->
-
     <p class="page-summary"><strong>TL;DR:</strong> We use a coarse floorplan as a shared spatial scaffold for <mark>recalling the past and guiding the future</mark>,<br>enabling consistent long-horizon indoor video generation.</p>
 
     <figure class="overview" id="overview">
@@ -85,14 +90,6 @@
     <section class="results-section" id="showcases" aria-labelledby="showcases-title">
       <h2 id="showcases-title">Showcases</h2>
       <p class="section-description">Our generated indoor videos <strong>maintain consistency</strong> and support plausible 3D point-cloud reconstruction.</p>
-      <!--
-        Showcases 使用 showcases/case1 至 case12 中的本地视频；可直接离线打开。
-        每个场景按钮的 data-floorplan / data-reference / data-video / data-pointcloud 指向对应素材。
-        各场景使用统一的素材文件名；previews 中的静态首帧用作封面和缩略图。
-        点击场景会切换全部四段视频，按原速静音播放；最长视频结束后切换至下个 Scene，最后一组播完回到第一组。
-        data-floorplan-crop 保存全视频内容边界；更换素材后运行 python3 scripts/prepare_floorplans.py 更新。
-        Generated video 内的播放条统一控制四段视频，短视频先结束时保留末帧。
-      -->
       <div class="showcase-gallery" data-showcase-gallery>
         <div class="showcase-stage">
           <div class="showcase-inputs">
@@ -218,8 +215,6 @@
     <section class="results-section" id="comparisons" aria-labelledby="comparisons-title">
       <h2 id="comparisons-title">Comparisons</h2>
       <p class="section-description">Our method <strong>maintains revisit consistency</strong>, while others struggle during extensive exploration.</p>
-      <!-- 直接读取 comparisons 中的 MP4；点击缩略图手动切换 case，播完停在最后一帧；封面使用对应视频的第一帧。 -->
-      <!-- 替换同名视频后，运行 python3 scripts/prepare_comparisons.py 在原文件上去音轨，并更新封面与缓存标识。 -->
       <div class="comparison-gallery" data-comparison-gallery>
         <div class="comparison-player">
           <video id="comparison-video" data-comparison-video src="comparisons/comp_case1_v2.mp4?v=8cda7f8f45d2" poster="comparisons/previews/comp_case1_v2.jpg?v=eb159317cebe" aria-label="Comparison video — Case 01" width="1280" height="720" controls muted playsinline preload="metadata">
@@ -249,8 +244,6 @@
     <section class="results-section" id="ablation-study" aria-labelledby="ablation-study-title">
       <h2 id="ablation-study-title">Ablation study</h2>
       <p class="section-description">Memory, layout-aware guidance, and semantic labels support <strong>consistent and coherent generation.</strong></p>
-      <!-- 按 Memory → Layout → Semantic 排列，手动切换主题，播完停在最后一帧；直接读取 ablations 原视频，封面为第一帧。 -->
-      <!-- 替换视频后运行 python3 scripts/prepare_ablations.py，直接去音轨并更新首帧封面、尺寸与缓存标识。 -->
       <div class="ablation-gallery" data-ablation-gallery>
         <h3 class="ablation-current-title" id="ablation-current-title" data-ablation-title>Memory mechanism</h3>
         <div class="ablation-player">
@@ -352,7 +345,6 @@
             <img src="multi_floorplans/000000_832x480.png" alt="Shared input image of a living room" width="832" height="480" loading="lazy">
             <figcaption>Shared input image</figcaption>
           </figure>
-          <!-- 共用一张参考图；每组生成视频的原生控件同步控制对应 floorplan。 -->
           <div class="multi-floorplan-grid">
             <div class="multi-floorplan-case" data-floorplan-pair data-floorplan="multi_floorplans/topdown.mp4" data-floorplan-crop="832,480,171,0,498,480" data-poster-prefix="multi_floorplans/previews/01" role="group" aria-labelledby="multi-floorplan-01-title">
               <h4 class="multi-floorplan-label multi-floorplan-plan-label" id="multi-floorplan-01-title">Floorplan 01</h4>
@@ -430,7 +422,6 @@
     <section class="results-section additional-videos-section" id="additional-videos" aria-labelledby="additional-videos-title">
       <h2 id="additional-videos-title">Additional videos</h2>
       <p class="section-description">Our method supports <strong>a wide range</strong> of indoor scenes and visual styles.</p>
-      <!-- 独立视频展示：复制 figure 可添加素材；更新 src 与 poster 即可，各自独立播放。 -->
       <div class="additional-video-grid">
         <figure class="additional-video-card">
           <video src="videos/024908.mp4?v=f580b621470c" poster="videos/previews/024908.jpg" aria-label="Additional video 01" width="832" height="480" controls muted loop playsinline preload="none">
